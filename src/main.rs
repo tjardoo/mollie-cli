@@ -7,7 +7,12 @@ mod handler;
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
-    handler::handle_cli_and_run(cli);
+    match handler::handle_cli_and_run(cli) {
+        Ok(_) => {}
+        Err(error) => {
+            println!("{}", error);
+        }
+    }
 
     Ok(())
 }

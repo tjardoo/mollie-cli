@@ -3,7 +3,7 @@ use errors::ApiError;
 const MOLLIE_API_V2_ENDPOINT: &str = "https://api.mollie.com/v2";
 
 mod endpoints;
-mod errors;
+pub mod errors;
 pub mod resources;
 
 pub struct Client {

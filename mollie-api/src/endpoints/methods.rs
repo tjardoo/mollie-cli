@@ -22,8 +22,6 @@ impl Methods<'_> {
     pub fn list(&self) -> Result<Vec<MollieMethod>, ApiError> {
         let response = self.client.get("methods".to_string())?;
 
-        dbg!(&response["_embedded"]["methods"]);
-
         let methods: Vec<MollieMethod> =
             serde_json::from_value(response["_embedded"]["methods"].clone())?;
 

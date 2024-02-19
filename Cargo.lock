@@ -588,6 +588,7 @@ dependencies = [
  "mollie-api",
  "serde",
  "serde_json",
+ "thiserror",
 ]
 
 [[package]]
