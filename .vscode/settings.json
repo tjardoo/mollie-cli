@@ -1,0 +1,7 @@
+{
+    "laravel-pint.enable": false,
+    "rust-analyzer.linkedProjects": [
+        ".\\mollie-api\\Cargo.toml"
+    ],
+    "rust-analyzer.showUnlinkedFileNotification": false,
+}
