@@ -2,13 +2,18 @@ use clap::Subcommand;
 
 #[derive(Subcommand, Clone)]
 pub enum CustomerCommand {
+    /// Create a new customer
     Create,
+    /// Retrieve a customer
     Get {
+        /// The id of the customer starting with 'cst_'
         #[arg(short = None, long = "id")]
         #[arg(value_parser = starts_with_prefix_cst)]
         id: String,
     },
+    /// Update a customer
     Update,
+    /// Delete a customer
     Delete,
 }
 

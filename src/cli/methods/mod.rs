@@ -1,13 +1,12 @@
 use self::command::MethodCommand;
 
 pub mod command;
-pub mod get;
-pub mod list;
+pub mod endpoints;
 pub mod resource;
 
 pub fn command(command: MethodCommand) {
     match command {
-        MethodCommand::List => list::command(),
-        MethodCommand::Get { id } => get::command(&id),
+        MethodCommand::List => endpoints::list::command(),
+        MethodCommand::Get { id } => endpoints::get::command(&id),
     }
 }

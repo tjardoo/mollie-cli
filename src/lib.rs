@@ -16,10 +16,13 @@ pub struct Cli {
 
 #[derive(Subcommand)]
 pub enum Command {
+    /// Manage customers
     #[clap(subcommand)]
     Customers(CustomerCommand),
+    /// Manage payments
     #[clap(subcommand)]
     Payments(PaymentCommand),
+    /// Manage methods
     #[clap(subcommand)]
     Methods(MethodCommand),
 }
