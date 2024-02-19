@@ -24,7 +24,7 @@ impl Display for Customer {
         write!(
             f,
             "{}\nid: {}\nname: {}\nemail: {}\nmode: {}",
-            "-- Customer --".to_uppercase().bright_blue(),
+            "Customer".to_uppercase().bright_blue(),
             self.id.bold().underline(),
             self.name,
             self.email,

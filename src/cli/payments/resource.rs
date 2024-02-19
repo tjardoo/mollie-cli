@@ -6,14 +6,9 @@ use mollie_api::resources::payments::{MolliePayment, MolliePaymentMode, MolliePa
 #[derive(Debug)]
 pub struct Payment {
     pub id: String,
-    pub mode: Mode,
     pub status: Status,
-}
-
-#[derive(Debug)]
-pub enum Mode {
-    Live,
-    Test,
+    pub amount: Amount,
+    pub mode: Mode,
 }
 
 #[derive(Debug)]
@@ -27,27 +22,46 @@ pub enum Status {
     Paid,
 }
 
+#[derive(Debug)]
+pub struct Amount {
+    pub value: String,
+    pub currency: String,
+}
+
+#[derive(Debug)]
+pub enum Mode {
+    Live,
+    Test,
+}
+
 impl Display for Payment {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
             f,
-            "{}\nid: {}\nmode: {}\nstatus: {}",
-            "-- Payment --".to_uppercase().bright_blue(),
+            "{}\nid: {}\nstatus: {}\namount {}\nmode: {}",
+            "Payment".to_uppercase().bright_blue(),
             self.id.bold().underline(),
+            match self.status {
+                Status::Open => "open".bright_blue(),
+                Status::Canceled => "canceled".red(),
+                Status::Pending => "pending".bright_blue(),
+                Status::Authorized => "authorized".bright_blue(),
+                Status::Expired => "expired".red(),
+                Status::Failed => "failed".red(),
+                Status::Paid => "paid".green(),
+            },
+            self.amount,
             match self.mode {
                 Mode::Live => "live".to_uppercase(),
                 Mode::Test => "test".to_uppercase(),
             },
-            match self.status {
-                Status::Open => "open".white().on_bright_blue(),
-                Status::Canceled => "canceled".white().on_red(),
-                Status::Pending => "pending".white().on_bright_blue(),
-                Status::Authorized => "authorized".white().on_bright_blue(),
-                Status::Expired => "expired".white().on_red(),
-                Status::Failed => "failed".white().on_red(),
-                Status::Paid => "paid".white().on_green(),
-            }
         )
+    }
+}
+
+impl Display for Amount {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{} {}", self.value, self.currency)
     }
 }
 
@@ -55,10 +69,6 @@ impl From<MolliePayment> for Payment {
     fn from(payment: MolliePayment) -> Self {
         Self {
             id: payment.id,
-            mode: match payment.mode {
-                MolliePaymentMode::Live => Mode::Live,
-                MolliePaymentMode::Test => Mode::Test,
-            },
             status: match payment.status {
                 MolliePaymentStatus::Open => Status::Open,
                 MolliePaymentStatus::Canceled => Status::Canceled,
@@ -67,6 +77,14 @@ impl From<MolliePayment> for Payment {
                 MolliePaymentStatus::Expired => Status::Expired,
                 MolliePaymentStatus::Failed => Status::Failed,
                 MolliePaymentStatus::Paid => Status::Paid,
+            },
+            amount: Amount {
+                value: payment.amount.value,
+                currency: payment.amount.currency,
+            },
+            mode: match payment.mode {
+                MolliePaymentMode::Live => Mode::Live,
+                MolliePaymentMode::Test => Mode::Test,
             },
         }
     }

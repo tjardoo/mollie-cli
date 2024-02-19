@@ -1,5 +1,8 @@
 use clap::{Parser, Subcommand};
-use cli::{customers::command::CustomerCommand, payments::command::PaymentCommand};
+use cli::{
+    customers::command::CustomerCommand, methods::command::MethodCommand,
+    payments::command::PaymentCommand,
+};
 
 pub mod api;
 pub mod cli;
@@ -17,4 +20,6 @@ pub enum Command {
     Customers(CustomerCommand),
     #[clap(subcommand)]
     Payments(PaymentCommand),
+    #[clap(subcommand)]
+    Methods(MethodCommand),
 }
