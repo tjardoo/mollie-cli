@@ -46,12 +46,12 @@ impl From<MollieMethod> for Method {
             id: method.id,
             description: method.description,
             status: match method.status {
-                MollieMethodStatus::Activated => Status::Activated,
-                MollieMethodStatus::PendingBoarding => Status::PendingBoarding,
-                MollieMethodStatus::PendingReview => Status::PendingReview,
-                MollieMethodStatus::PendingExternal => Status::PendingExternal,
-                MollieMethodStatus::Rejected => Status::Rejected,
-                MollieMethodStatus::NotRequested => Status::NotRequested,
+                Some(MollieMethodStatus::Activated) => Status::Activated,
+                Some(MollieMethodStatus::PendingBoarding) => Status::PendingBoarding,
+                Some(MollieMethodStatus::PendingReview) => Status::PendingReview,
+                Some(MollieMethodStatus::PendingExternal) => Status::PendingExternal,
+                Some(MollieMethodStatus::Rejected) => Status::Rejected,
+                None => Status::NotRequested,
             },
         }
     }

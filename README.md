@@ -12,6 +12,7 @@ Set the environment variable `MOLLIE_API_KEY`.
 - `mollie-cli payments get --id <id>`
 - `mollie-cli methods list`
 - `mollie-cli methods get --id <id>`
+- `mollie-cli methods all`
 
 ## Help
 

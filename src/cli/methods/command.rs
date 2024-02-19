@@ -10,4 +10,6 @@ pub enum MethodCommand {
         #[arg(short = None, long = "id")]
         id: String,
     },
+    /// List all payment methods
+    All,
 }

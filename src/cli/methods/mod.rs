@@ -10,6 +10,7 @@ pub fn command(command: MethodCommand) -> Result<(), CliError> {
     match command {
         MethodCommand::List => endpoints::list::command()?,
         MethodCommand::Get { id } => endpoints::get::command(&id)?,
+        MethodCommand::All => endpoints::all::command()?,
     };
 
     Ok(())

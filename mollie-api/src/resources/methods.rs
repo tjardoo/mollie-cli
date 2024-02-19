@@ -4,7 +4,7 @@ use serde::Deserialize;
 pub struct MollieMethod {
     pub id: String,
     pub description: String,
-    pub status: MollieMethodStatus,
+    pub status: Option<MollieMethodStatus>,
 }
 
 #[derive(Deserialize, Debug)]
@@ -19,6 +19,4 @@ pub enum MollieMethodStatus {
     PendingExternal,
     #[serde(rename = "rejected")]
     Rejected,
-    #[serde(rename = "null")]
-    NotRequested,
 }

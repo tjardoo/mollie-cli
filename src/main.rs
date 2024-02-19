@@ -10,7 +10,7 @@ fn main() -> Result<()> {
     match handler::handle_cli_and_run(cli) {
         Ok(_) => {}
         Err(error) => {
-            println!("{}", error);
+            eprintln!("{}", error);
         }
     }
 

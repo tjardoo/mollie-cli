@@ -14,7 +14,7 @@ impl Payments<'_> {
     pub fn get(&self, payment_id: &str) -> Result<MolliePayment, ApiError> {
         let response = self.client.get(format!("payments/{}", payment_id))?;
 
-        let payment: MolliePayment = serde_json::from_value(response)?;
+        let payment: MolliePayment = serde_json::from_value(response).unwrap();
 
         Ok(payment)
     }
