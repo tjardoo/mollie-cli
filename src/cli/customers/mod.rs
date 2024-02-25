@@ -9,6 +9,12 @@ pub mod resource;
 pub fn command(command: CustomerCommand) -> Result<(), CliError> {
     match command {
         CustomerCommand::Get { id } => endpoints::get::command(&id)?,
+        CustomerCommand::Update {
+            id,
+            name,
+            email,
+            locale,
+        } => endpoints::update::command(&id, name, email, locale)?,
         _ => {
             unimplemented!();
         }

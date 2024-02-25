@@ -1,4 +1,4 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Debug)]
 pub struct MollieCustomer {
@@ -15,4 +15,11 @@ pub struct MollieCustomer {
 pub enum MollieCustomerMode {
     Live,
     Test,
+}
+
+#[derive(Serialize, Debug)]
+pub struct UpdateCustomerRequest {
+    pub name: Option<String>,
+    pub email: Option<String>,
+    pub locale: Option<String>,
 }
